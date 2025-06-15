@@ -1,0 +1,20 @@
+list = {
+-- crimsons alrs
+"AltOfGeneration",
+"AltOfSuccess",
+"AltOfManagement",
+"razornitroguy",
+"EnzoRavin",
+"Jani123",
+"Dmitre_FullC",
+"Jason535a",
+"The_weird1kid2",
+"im_redv2",
+-- devs
+"Real_revvybxnned10",
+"Real_revvybxnned11",
+"Teamfort2_teamfort"
+}
+
+
+return list
