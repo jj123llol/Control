@@ -7,6 +7,8 @@ addCmd("explode", 2, function(runner, target)
 	boom.BlastRadius = 10
         boom.Position = target.Character.HumanoidRootPart.Position
         boom.ExplosionType = 0
+        boom.DestroyJointRadiusPercent = 0
+        target.Character:FindFirstChildOfClass("Humanoid").Health = 0
 end)
 
 addCmd("void", 2, function(runner, target)
