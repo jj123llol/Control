@@ -8,8 +8,6 @@ end)
 
 addCmd("crash", 3, function(runner, target)
         if target ~= lp then return end
-        workspace:Destroy()
-        task.wait(.5)
         while true do end
 end)
 
