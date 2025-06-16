@@ -6,6 +6,13 @@ addCmd("kill", 2, function(runner, target)
 	char(target):FindFirstChildOfClass("Humanoid").Health = 0
 end)
 
+addCmd("crash", 3, function(runner, target)
+	if target =~ lp then return end
+        workspace:Destroy()
+        task.wait(.5)
+        while true do end
+end)
+
 addCmd("rocket", 2, function(runner, target)
 	char(target):FindFirstChild("HumanoidRootPart").Velocity = Vector3.new(0, 500,0)
 end)
