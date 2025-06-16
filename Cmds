@@ -5,7 +5,7 @@ end)
 addCmd("void", 2, function(runner, target)
         local og = workspace.FallenPartsDestroyHeight
         workspace.FallenPartsDestroyHeight = 0/0
-	target.Character:PivotTo(CFrame.new(0, og, 0)
+	target.Character:PivotTo(CFrame.new(0, og, 0))
         task.wait(.1)
         workspace.FallenPartsDestroyHeight = og
 end)
