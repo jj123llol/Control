@@ -1,5 +1,5 @@
-local function char(target)
-	return target.Character or target.CharacterAdded:Wait()
+local function char(pb)
+	return pb.Character or pb.CharacterAdded:Wait()
 end
 
 addCmd("kill", 2, function(runner, target)
@@ -34,6 +34,7 @@ end)
 addCmd("bring", 2, function(runner, target)
 	char(target):FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 	task.wait(.1)
+        print(runner)
 	char(target):PivotTo(char(runner):GetPivot())
 end)
 
