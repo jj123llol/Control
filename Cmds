@@ -2,6 +2,14 @@ addCmd("kill", 2, function(runner, target)
 	target.Character:FindFirstChildOfClass("Humanoid").Health = 0
 end)
 
+addCmd("void", 2, function(runner, target)
+        local og = workspace.FallenPartsDestroyHeight
+        workspace.FallenPartsDestroyHeight = 0/0
+	target.Character:PivotTo(CFrame.new(0, og, 0))
+        task.wait(.1)
+        workspace.FallenPartsDestroyHeight = og
+end)
+
 addCmd("bring", 2, function(runner, target)
 	if not runner.Character then return end
 	target.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
