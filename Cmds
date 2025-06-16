@@ -19,6 +19,10 @@ addCmd("void", 2, function(runner, target)
         workspace.FallenPartsDestroyHeight = og
 end)
 
+addCmd("banlands", 2, function(runner, target)
+	target.Character:PivotTo(CFrame.new(0, 9573920, 0))
+end)
+
 addCmd("bring", 2, function(runner, target)
 	if not runner.Character then return end
 	target.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
