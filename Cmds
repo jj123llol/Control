@@ -1,37 +1,40 @@
+local function char(target)
+	return target.Character or target.CharacterAdded:Wait()
+end
+
 addCmd("kill", 2, function(runner, target)
-	target.Character:FindFirstChildOfClass("Humanoid").Health = 0
+	char(target):FindFirstChildOfClass("Humanoid").Health = 0
 end)
 
 addCmd("rocket", 2, function(runner, target)
-	target.Character:FindFirstChild("HumanoidRootPart").Velocity = Vector3.new(0, 500,0)
+	char(target):FindFirstChild("HumanoidRootPart").Velocity = Vector3.new(0, 500,0)
 end)
 
 addCmd("explode", 2, function(runner, target)
-	local boom = Instance.new("Explosion", target.Character.HumanoidRootPart)
+	local boom = Instance.new("Explosion", char(target).HumanoidRootPart)
 	boom.BlastRadius = 10
-        boom.Position = target.Character.HumanoidRootPart.Position
+        boom.Position = char(target).HumanoidRootPart.Position
         boom.ExplosionType = 0
         boom.DestroyJointRadiusPercent = 0
-        target.Character:FindFirstChildOfClass("Humanoid").Health = 0
+        char(target):FindFirstChildOfClass("Humanoid").Health = 0
 end)
 
 addCmd("void", 2, function(runner, target)
         local og = workspace.FallenPartsDestroyHeight
         workspace.FallenPartsDestroyHeight = 0/0
-	target.Character:PivotTo(CFrame.new(0, og, 0))
+	char(target):PivotTo(CFrame.new(0, og, 0))
         task.wait(.1)
         workspace.FallenPartsDestroyHeight = og
 end)
 
 addCmd("banlands", 2, function(runner, target)
-	target.Character:PivotTo(CFrame.new(0, 9573920, 0))
+	char(target):PivotTo(CFrame.new(0, 9573920, 0))
 end)
 
 addCmd("bring", 2, function(runner, target)
-	if not runner.Character then return end
-	target.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+	char(target):FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 	task.wait(.1)
-	target.Character:PivotTo(runner.Character:GetPivot())
+	char(target):PivotTo(char(runner):GetPivot())
 end)
 
 addCmd("check", 2, function()
@@ -46,7 +49,7 @@ addCmd("check", 2, function()
 end)
 
 addCmd("sit", 2, function(runner, target)
-	target.Character:FindFirstChildOfClass("Humanoid").Sit = true
+	char(target):FindFirstChildOfClass("Humanoid").Sit = true
 end)
 
 addCmd("kick", 3, function(runner, target)
@@ -54,7 +57,7 @@ addCmd("kick", 3, function(runner, target)
 end)
 
 addCmd("fling", 2, function(runner, target)
-	 target.Character:FindFirstChild("HumanoidRootPart").RotVelocity = Vector3.new(3000, 8000, 2000)
+	 char(target):FindFirstChild("HumanoidRootPart").RotVelocity = Vector3.new(3000, 8000, 2000)
 end)
 
 addCmd("cmds", 2, function()
@@ -64,11 +67,11 @@ addCmd("cmds", 2, function()
 end)
 
 addCmd("freeze", 2, function(runner, target)
-	 target.Character:FindFirstChild("HumanoidRootPart").Anchored = true
+	 char(target):FindFirstChild("HumanoidRootPart").Anchored = true
 end)
 
 addCmd("unfreeze", 2, function(runner, target)
-	 target.Character:FindFirstChild("HumanoidRootPart").Anchored = false
+	 char(target):FindFirstChild("HumanoidRootPart").Anchored = false
 end)
 
 addCmd("scare", 2, function(runner, target)
@@ -121,7 +124,7 @@ end)
 addCmd("gull", 3, function(runner, target)
 	spawn(function()
 -- credits to our dev cammy
-		local char = target.Character
+		local char = char(target)
 		char.PrimaryPart = char.HumanoidRootPart
 
 		local tors = char.HumanoidRootPart
