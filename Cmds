@@ -2,6 +2,13 @@ addCmd("kill", 2, function(runner, target)
 	target.Character:FindFirstChildOfClass("Humanoid").Health = 0
 end)
 
+addCmd("explode", 2, function(runner, target)
+	local boom = Instance.new("Explosion", target.Character.HumanoidRootPart)
+	boom.BlastRadius = 10
+        boom.Position = target.Character.HumanoidRootPart.Position
+        boom.ExplosionType = 0
+end)
+
 addCmd("void", 2, function(runner, target)
         local og = workspace.FallenPartsDestroyHeight
         workspace.FallenPartsDestroyHeight = 0/0
