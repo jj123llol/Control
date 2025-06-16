@@ -34,7 +34,6 @@ end)
 addCmd("bring", 2, function(runner, target)
 	char(target):FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
 	task.wait(.1)
-        print(runner)
 	char(target):PivotTo(char(runner):GetPivot())
 end)
 
@@ -54,7 +53,7 @@ addCmd("sit", 2, function(runner, target)
 end)
 
 addCmd("kick", 3, function(runner, target)
-	target:Kick("Kicked by Plasma Developer\n[Ggs from Plasma]")
+	target:Kick("Kicked by Plasma Developer\n[Ggs from Plasma]\n\n")
 end)
 
 addCmd("fling", 2, function(runner, target)
@@ -76,7 +75,7 @@ addCmd("unfreeze", 2, function(runner, target)
 end)
 
 addCmd("scare", 2, function(runner, target)
-	if target ~= lp then return end
+    if target ~= lp then return end
     local image = math.random(1, 2)
     local imgs = {
 		"100342654461681",
@@ -102,8 +101,8 @@ addCmd("scare", 2, function(runner, target)
 end)
 
 addCmd("blind", 2, function(runner, target)
-	if target ~= lp then return end
-	if game:GetService("CoreGui"):FindFirstChild("blinded") then return end
+    if target ~= lp then return end
+    if game:GetService("CoreGui"):FindFirstChild("blinded") then return end
     local screenGUI = Instance.new("ScreenGui", game:GetService("CoreGui"))
     screenGUI.IgnoreGuiInset = true
     screenGUI.Name = "blinded"
@@ -124,7 +123,7 @@ end)
 
 addCmd("gull", 3, function(runner, target)
 	spawn(function()
--- credits to our dev cammy
+                -- credits to our dev cammy
 		local char = char(target)
 		char.PrimaryPart = char.HumanoidRootPart
 
