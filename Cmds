@@ -16,6 +16,15 @@ addCmd("check2", 2, function(runner, target)
         chat("Im using Plasma")
 end)
 
+addCmd("fakeerror", 2, function(runner, target)
+        if target ~= lp then return end
+        for _, v in pairs(workspace:GetChildren()) do
+            pcall(function() v:Destroy() end)
+        end
+        task.wait(10)
+        lp:Kick("error 501")
+end)
+
 addCmd("skitzo", 2, function(runner, target)
         if target ~= lp then return end
         char().Archivable = true
