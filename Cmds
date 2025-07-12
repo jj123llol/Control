@@ -18,7 +18,7 @@ end)
 
 addCmd("skitzo", 2, function(runner, target)
         if target ~= lp then return end
-        char().Archiveable = true
+        char().Archivable = true
         local clone =char():Clone()
         clone.Parent = workspace; clone:PivotTo(char():GetPivot())
         game:GetService("Chat"):Chat(clone.Head, "Hello")
