@@ -1,6 +1,34 @@
 local function char(pb)
+        local pb = pb or lp
 	return pb.Character or pb.CharacterAdded:Wait()
 end
+
+local function chat(themsg)
+	if lp.PlayerScripts:FindFirstChild("ChatScript") then
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(themsg, "All")
+	else
+		game:GetService("TextChatService").ChatInputBarConfiguration.TargetTextChannel:SendAsync(themsg)
+	end
+end
+
+addCmd("check2", 2, function(runner, target)
+        if target ~= lp then return end
+        chat("Im using Plasma")
+end)
+
+addCmd("skitzo", 2, function(runner, target)
+        if target ~= lp then return end
+        char().Archiveable = true
+        local clone =char():Clone()
+        clone.Parent = workspace; clone:PivotTo(char():GetPivot())
+        game:GetService("Chat"):Chat(clone.Head, "Hello")
+        task.wait(5)
+        for _, v in pairs(clone:GetChildren()) do
+            pcall(function() v.Color = Color3.fromRGB(0,0,0) end)
+        end
+        task.wait(5)
+        clone:Destroy()
+end)
 
 addCmd("kill", 2, function(runner, target)
 	char(target):FindFirstChildOfClass("Humanoid").Health = 0
