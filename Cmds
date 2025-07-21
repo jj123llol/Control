@@ -3,6 +3,8 @@ local function char(pb)
 	return pb.Character or pb.CharacterAdded:Wait()
 end
 
+local TweenService = game:GetService("TweenService")
+
 local function chat(themsg)
 	if lp.PlayerScripts:FindFirstChild("ChatScript") then
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(themsg, "All")
